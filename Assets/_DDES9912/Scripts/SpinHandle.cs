@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class SpinHandle : MonoBehaviour
 {
-    public float speed = 200f;
-    public float targetAngle = 45f;
+    public float speed = 0f;
+    public float targetAngle = 0f;
 
     private float rotated = 0f;
     private bool pulling = false;
