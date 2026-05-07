@@ -17,6 +17,7 @@ public class NMAWalkTowards : MonoBehaviour
     public UnityEvent onArrive;
     public UnityEvent onFirstMove;
     public Transform[] altDestinations;
+    public int currentDestinationIndex = 0;
 
     [Header("Graphics")]
     public Animator avatarAnimator;
@@ -55,11 +56,11 @@ public class NMAWalkTowards : MonoBehaviour
         }
         else
         {
-            arrivalFlag = true;
-
             if (prevArrivalFlag != arrivalFlag)
             {
                 onArrive.Invoke();
+
+                GoToNextDestination();
             }
         }
 
@@ -115,5 +116,19 @@ public class NMAWalkTowards : MonoBehaviour
                 avatarAnimator.SetFloat(speedString, fixedUpdateSpeed);
             }
         }
+    }
+
+    public void GoToNextDestination()
+    {
+        if (altDestinations.Length == 0)
+            return;
+
+        currentDestinationIndex++;
+
+        // 超出数组后回到0
+        if (currentDestinationIndex >= altDestinations.Length)
+            currentDestinationIndex = 0;
+
+        destination = altDestinations[currentDestinationIndex];
     }
 }
